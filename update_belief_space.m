@@ -91,6 +91,9 @@ for i = selected
             grid_index(j) = 1;
         end
     end
+%     grid_index
+%     param.noramtive_range
+%     param.gridwidth
     param.grid(grid_index(1), grid_index(2)) = param.grid(grid_index(1), grid_index(2)) + 1;
     param.nondominant = [param.nondominant; [i grid_index]];
 end

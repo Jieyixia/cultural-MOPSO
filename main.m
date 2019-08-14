@@ -1,9 +1,8 @@
 % cultural-based multiobjective particle swarm optimization
-% 代码还没有调通
 % init_param里的参数设置还没有参考文献
 
-param = init_param('kur', 'real');
-param = problems('kur', param);
+param = init_param('sch', 'real');
+param = problems('sch', param);
 
 % initialize pop space
 param = init_pop_space(param);
@@ -15,6 +14,9 @@ param = init_belief_space(param);
 T = 100;
 for t = 1 : T
     t
+    
+    boundary_num = sum(sum(param.pop == 0)) + sum(sum(param.pop == 1));
+    boundary_num
     % evaluate pop_space
     param = fitness(param);
 
@@ -49,7 +51,17 @@ for t = 1 : T
         title(['No.', num2str(t), 'th iteration'])
         
         p_f = [p_f1, p_f2];
+        
         v = hypervolume(p_f);
         fprintf('t = %d, hypervolume = %f\n', t, v)
+        
+%         % 目前只针对fon
+%         if t == T
+%             hold on
+%             pop = true_pf(param.func_name);
+%             pf_1 = param.f{1}(pop);
+%             pf_2 = param.f{2}(pop);
+%             plot(pf_1, pf_2, 'o')
+%         end
     end
 end

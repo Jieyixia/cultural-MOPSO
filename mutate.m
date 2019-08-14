@@ -37,10 +37,14 @@ function param = mutate(param)
             %--------------------------------------------------------------------
             if param.pop(i, j) > upper_bound(j) || param.pop(i, j) < lower_bound(j)
                 count = count + 1;
+                % ----------------------------------------------------------------
+                param.velocity(i, j) = -param.velocity(i, j);
+                % ----------------------------------------------------------------
             end
             %--------------------------------------------------------------------
             param.pop(i, j) = min(param.pop(i, j), upper_bound(j));
             param.pop(i, j) = max(param.pop(i, j), lower_bound(j));
+            
             
             j_count = j_count + 1;
             if j_count == mdim

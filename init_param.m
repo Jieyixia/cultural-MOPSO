@@ -3,7 +3,8 @@ function param = init_param(func_name, encoding)
     func_name = lower(func_name);
     encoding = lower(encoding);
 
-    param.pop_size = 100;
+    param.pop_size = 200;
+    param.func_name = func_name;
     param.encoding = encoding;
     
     param.global_archive = [];
