@@ -3,7 +3,7 @@ function param = select_pbest(param)
 % the largest distance from all current populations
 pop = param.pop;
 pop_size = param.pop_size;
-dim = param.dim;
+dim = param.dim;  
 f = param.f;
 situational = param.situational;
 

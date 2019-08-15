@@ -3,7 +3,7 @@ function param = init_param(func_name, encoding)
     func_name = lower(func_name);
     encoding = lower(encoding);
 
-    param.pop_size = 200;
+    param.pop_size = 100;
     param.func_name = func_name;
     param.encoding = encoding;
     
@@ -47,6 +47,10 @@ function param = init_param(func_name, encoding)
             param.dim = 10;
             param.upper_bound = ones(1, param.dim) * 5;
             param.lower_bound = ones(1, param.dim) * -5;
+%             % test---------------------------------------
+%             param.upper_bound = ones(1, param.dim);
+%             param.lower_bound = zeros(1, param.dim);
+%             % test---------------------------------------
             param.upper_bound(1) = 1;
             param.lower_bound(1) = 0;
             param.chrom_length = 30;
@@ -83,11 +87,14 @@ function param = init_param(func_name, encoding)
         param.pm = 1 /  param.chrom_length; 
     end
     
-    % cg, cp和w的设置还需要参考文献
-    
     param.cg_max = 3;
     param.cg_min = 1;
-    param.cg = rand * (param.cg_max - param.cg_min) + param.cg_min;
+%     param.cg = rand * (param.cg_max - param.cg_min) + param.cg_min;
+
+    % the same as paper-------------------------------
+    param.cg = 2;
+    % the same as paper-------------------------------
+    
     param.alpha = 1;
     
     % ???这里的初始值应该怎么设置???
@@ -96,7 +103,12 @@ function param = init_param(func_name, encoding)
     
     param.cp_max = 3;
     param.cp_min = 1;
-    param.cp = rand(param.pop_size, 1) * (param.cp_max - param.cp_min) + param.cp_min;
+%     param.cp = rand(param.pop_size, 1) * (param.cp_max - param.cp_min) + param.cp_min;
+
+    % the same as paper-------------------------------
+    param.cp = ones(param.pop_size, 1) * 2;
+    % the same as paper-------------------------------
+    
     param.beta = 1;
     
     param.Np_old = ones(param.pop_size, 1);
@@ -104,9 +116,13 @@ function param = init_param(func_name, encoding)
     
     param.w_max = 0.9;
     param.w_min = 0.1;
-    param.w = rand(param.pop_size, param.dim) * (param.w_max - param.w_min) + param.w_min;
-    param.delta_w = 0.1;
+%     param.w = rand(param.pop_size, param.dim) * (param.w_max - param.w_min) + param.w_min;
+
+    % the same as paper-------------------------------
+    param.w = ones(param.pop_size, param.dim) * 0.4;
+    % the same as paper-------------------------------
+    param.delta_w = 0.2;
     
-    param.grid_num = [4, 4]; 
+    param.grid_num = [10, 10]; 
     
 end

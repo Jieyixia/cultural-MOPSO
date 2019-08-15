@@ -64,8 +64,21 @@ end
 selected = find(phi == 1);
 selected = selected';
 
-param.normative_range(1, :) =  max(obj_value(selected, :), [], 1);
-param.normative_range(2, :) =  min(obj_value(selected, :), [], 1);
+upper = max(obj_value(selected, :), [], 1);
+lower = min(obj_value(selected, :), [], 1);
+
+% param.normative_range(1, :) =  upper;
+% param.normative_range(2, :) =  lower;
+% 需要修改的地方
+% 可以根据global archive来寻找当前的格子？
+% 从global archive中寻找gbest而不是第t代的非支配解？
+if sum(sum(param.normative_range)) == 0
+    param.normative_range(1, :) =  upper;
+    param.normative_range(2, :) =  lower;
+else
+    param.normative_range(1, :) = max(upper, param.normative_range(1, :));
+    param.normative_range(2, :) = min(lower, param.normative_range(2, :));   
+end
 
 param.normative_velocity(1, :) = max(velocity(selected, :), [], 1);
 param.normative_velocity(2, :) = min(velocity(selected, :), [], 1);
@@ -79,6 +92,7 @@ if length(selected) == 1
     return
 end
 
+% 增加判断是否所有的非支配解都一样？使zdt2能顺利运行？
 param.grid = zeros(param.grid_num); 
 param.gridwidth = (param.normative_range(1, :) - param.normative_range(2, :))./grid_num;
 param.nondominant = [];

@@ -1,8 +1,8 @@
 % cultural-based multiobjective particle swarm optimization
 % init_param里的参数设置还没有参考文献
 
-param = init_param('sch', 'real');
-param = problems('sch', param);
+param = init_param('zdt4', 'real');
+param = problems('zdt4', param);
 
 % initialize pop space
 param = init_pop_space(param);
